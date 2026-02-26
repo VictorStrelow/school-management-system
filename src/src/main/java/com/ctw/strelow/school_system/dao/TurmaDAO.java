@@ -59,7 +59,7 @@ public class TurmaDAO {
     }
 
     public Turma findById(int id) {
-        String query = "SELECT id, nome, curso_id, professor_id  FROM turma WHERE id = ?";
+        String query = "SELECT * FROM turma WHERE id = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -68,11 +68,13 @@ public class TurmaDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Turma(rs.getInt("id"),
-                            rs.getString("nome"),
-                            rs.getInt("curso_id"),
-                            rs.getInt("professor_id")
-                    );
+                    Turma turma = new Turma();
+                    turma.setId(rs.getInt("id"));
+                    turma.setNome(rs.getString("nome"));
+                    turma.setCurso_id(rs.getInt("curso_id"));
+                    turma.setProfessor_id(rs.getInt("professor_id"));
+
+                    return turma;
                 }
             }
 
