@@ -122,4 +122,36 @@ public class AlunoDAO {
         }
     }
 
+    public List<Aluno> findByTurmaId(int id) {
+        String query = """
+                SELECT a.id, a.nome, a.email, a.matricula, a.data_nascimento FROM aluno a
+                JOIN turma_aluno ta ON a.id = ta.aluno_id
+                WHERE ta.turma_id = ?
+                """;
+        List<Aluno> alunos = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    alunos.add(new Aluno(
+                            rs.getInt("id"),
+                            rs.getString("nome"),
+                            rs.getString("email"),
+                            rs.getString("matricula"),
+                            rs.getDate("data_nascimento").toLocalDate()
+                    ));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar alunos da turma ", e);
+        }
+
+        return alunos;
+    }
+
 }
