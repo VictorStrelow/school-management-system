@@ -40,7 +40,7 @@ public class AlunoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado!");
         }
 
-        return  AlunoMapper.toResponseDTO(aluno);
+        return AlunoMapper.toResponseDTO(aluno);
     }
 
     public AlunoResponseDTO atualizarAluno(int id, AlunoRequestDTO alunoRequestDTO) {

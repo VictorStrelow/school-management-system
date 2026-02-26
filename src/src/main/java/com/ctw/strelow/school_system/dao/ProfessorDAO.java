@@ -1,6 +1,5 @@
 package com.ctw.strelow.school_system.dao;
 
-import com.ctw.strelow.school_system.dto.professor.ProfessorResponseDTO;
 import com.ctw.strelow.school_system.model.Professor;
 import com.ctw.strelow.school_system.utils.ConnectionFactory;
 import org.springframework.stereotype.Repository;

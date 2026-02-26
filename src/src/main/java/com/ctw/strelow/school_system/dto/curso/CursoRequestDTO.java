@@ -1,4 +1,9 @@
 package com.ctw.strelow.school_system.dto.curso;
 
-public class CursoRequestDTO {
-}
+import java.util.List;
+
+public record CursoRequestDTO (
+        String nome,
+        String codigo,
+        List<Integer> professorIds
+) {}

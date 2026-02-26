@@ -2,7 +2,6 @@ package com.ctw.strelow.school_system.dao;
 
 import com.ctw.strelow.school_system.model.Aluno;
 import com.ctw.strelow.school_system.utils.ConnectionFactory;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -11,12 +10,6 @@ import java.util.List;
 
 @Repository
 public class AlunoDAO {
-
-    private final ResourceLoader resourceLoader;
-
-    public AlunoDAO(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
 
     public Aluno save(Aluno aluno) {
         String query = "INSERT INTO aluno (nome, email, matricula, data_nascimento) VALUES (?, ?, ?, ?)";
@@ -89,7 +82,7 @@ public class AlunoDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar aluno por ID", e);
+            throw new RuntimeException("Erro ao buscar aluno por ID ", e);
         }
 
         return null;
