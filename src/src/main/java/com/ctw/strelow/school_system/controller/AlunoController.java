@@ -2,8 +2,10 @@ package com.ctw.strelow.school_system.controller;
 
 import com.ctw.strelow.school_system.dto.aluno.AlunoRequestDTO;
 import com.ctw.strelow.school_system.dto.aluno.AlunoResponseDTO;
+import com.ctw.strelow.school_system.dto.nota.NotaResponseDTO;
 import com.ctw.strelow.school_system.model.Aluno;
 import com.ctw.strelow.school_system.service.AlunoService;
+import com.ctw.strelow.school_system.service.NotaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +16,11 @@ import java.util.List;
 public class AlunoController {
 
     private final AlunoService alunoService;
+    private final NotaService notaService;
 
-    public AlunoController(AlunoService alunoService) {
+    public AlunoController(AlunoService alunoService, NotaService notaService) {
         this.alunoService = alunoService;
+        this.notaService = notaService;
     }
 
     @PostMapping
@@ -44,6 +48,11 @@ public class AlunoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAluno(@PathVariable int id) {
         alunoService.deletarAluno(id);
+    }
+
+    @GetMapping("/{id}/notas")
+    public List<NotaResponseDTO> buscarNotasDoAluno(@PathVariable int id) {
+        return notaService.buscarNotasPorAluno(id);
     }
 
 }

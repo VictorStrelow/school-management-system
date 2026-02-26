@@ -21,10 +21,6 @@ public class AulaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AulaResponseDTO criarAula(@RequestBody AulaRequestDTO aulaRequestDTO) {
-        System.out.println("=== TESTE DE RECEÇÃO DA AULA ===");
-        System.out.println("ID da Turma que chegou: " + aulaRequestDTO.turma_id());
-        System.out.println("================================");
-
         return aulaService.criarAula(aulaRequestDTO);
     }
 
